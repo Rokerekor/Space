@@ -27,11 +27,13 @@ public class Main : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		cameraShakeEffect();
-		cameraGlowEffect();
-		updatePositions();
-		if(tutorialMode){
-			tutorial();
+		if(Time.timeScale > 0){
+			cameraShakeEffect();
+			cameraGlowEffect();
+			updatePositions();
+			if(tutorialMode){
+				tutorial();
+			}
 		}
 	}
 	void OnTriggerStay2D(Collider2D col){

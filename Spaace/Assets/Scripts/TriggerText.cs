@@ -10,6 +10,9 @@ public class TriggerText : MonoBehaviour {
 	bool triggered = false;
 	void Start () {
 		TextMesh display = GetComponent<TextMesh>();
+		if(display == null){
+			display = transform.Find("TextObject").GetComponent<TextMesh>();
+		}
 	}
 	
 	void Update () {
@@ -18,6 +21,10 @@ public class TriggerText : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D col){
 		if(col.tag.Equals("Player")){
+			/*Store s = this.gameObject.transform.parent.GetComponent<Store>();
+			if(s != null && !s.homeBase){
+				Camera.main.GetComponent<Map>().storeFound(s);
+			}*/
 			textStatus(true);
 			triggered = true;
 		}
@@ -25,7 +32,7 @@ public class TriggerText : MonoBehaviour {
 	public void OnTriggerExit2D(Collider2D col){
 		if(col.tag.Equals("Player")){
 			textStatus(false);
-			triggered = true;
+			triggered = false;
 		}
 	}
 	public void textStatus(bool status){
@@ -45,4 +52,5 @@ public class TriggerText : MonoBehaviour {
 			textStatus(true);
 		}
 	}
+	public bool isTriggered(){return triggered;}
 }
